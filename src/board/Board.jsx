@@ -21,7 +21,7 @@ useEffect(() => {
 
  const [{isOver}, drop] = useDrop(() => ({
     accept: "card",
-    drop: (item) => dropInSpadesArray(item.id, item.suit, item.value),
+    drop: (item) => dropInSpadesArray(item.id, item.suit, item.value, item.face),
     collect: (monitor) => ({
         isOver: !!monitor.isOver(),
     })
@@ -29,21 +29,35 @@ useEffect(() => {
 })) 
 
 
-const dropInSpadesArray = (id, suit, value) => {
+const spliceFromCards = (id) => {
+    for (let i = 0; i < deck.length; i++) {
+        if(deck[i].id === id) {
+            deck.splice(i, 1);
+        }
+        
+    }
+}
+
+
+
+
+const dropInSpadesArray = (id, suit, value, face) => {
+    
     setSpadesArray(spadesArray => {
       if (spadesArray.length === 0 && suit === "spades") {
         if (value === 1) {
-          const newArray = deck.filter(item => id === item.id);
-          return [...spadesArray, newArray[0]];
+          spliceFromCards(id)
+          return [...spadesArray, {id: id, face: face, suit: suit, value: value}];
         }
       } else if (spadesArray.length > 0 && suit === "spades") {
         if (spadesArray[spadesArray.length-1].value === value - 1) {
             setSpadesArray(spadesArray => {
-                const newArray = deck.filter(item => id === item.id);
-                return [...spadesArray, newArray[0]];
+                spliceFromCards(id)
+                return [...spadesArray, {id: id, face: face, suit: suit, value: value}];
             })
         }
       }
+
       return spadesArray;
     });
   };

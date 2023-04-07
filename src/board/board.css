@@ -24,11 +24,15 @@
     border-radius: 5px;
     position: relative;
 }
-
+ 
 .dropped-card {
     width: 50px;
     object-fit: contain;
+    position: absolute;
+    top: 0;
 }
+ 
+
 
 .icon {
     width: 20px;
