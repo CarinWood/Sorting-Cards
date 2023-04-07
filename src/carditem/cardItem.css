@@ -1,0 +1,9 @@
+.card {
+    width: 50px;
+    object-fit: contain;
+    cursor: grab;
+}
+
+.hidden {
+    visibility: hidden;
+}
