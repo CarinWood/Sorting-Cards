@@ -51,12 +51,13 @@
 }
 
 .card-box {
-    width: 100%;
+    width: 52%;
     padding: 0px 50px;
     height: 400px;
     position: absolute;
     bottom: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
