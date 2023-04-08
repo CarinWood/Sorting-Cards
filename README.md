@@ -3,7 +3,7 @@
  #### This is an app I made for testing out React drag- and drop function.
 
 
-
+[Try out the app here](https://carinwood-sorting-cards.netlify.app/)
 
 
 <img src="src/images/sorting.png" width="600" />
