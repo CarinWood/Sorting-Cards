@@ -9,6 +9,12 @@ import spadeeight from '../cards/8_spade.png'
 import spadenine from '../cards/9_spade.png'
 import spadeten from '../cards/10_spade.png'
 import spadeJack from '../cards/11_spade.png'
+import spadeQueen from '../cards/12_spade.png'
+import spadeKing from '../cards/13_spade.png'
+
+import heartAce from '../cards/1_heart.png'
+import heart02 from '../cards/2_heart.png'
+import heart03 from '../cards/3_heart.png'
 
 export const Deck = [
     {
@@ -77,6 +83,37 @@ export const Deck = [
         face: spadeJack,
         suit: "spades",
         value: 11,
+    },
+    {
+        id: 12,
+        face: spadeQueen,
+        suit: "spades",
+        value: 12,
+
+    }, 
+    {
+        id: 13,
+        face: spadeKing,
+        suit: "spades",
+        value: 13,
+    },
+    {
+        id: 14,
+        face: heartAce,
+        suit: "hearts",
+        value: 1,
+    },
+    {
+        id: 15,
+        face: heart02,
+        suit: "hearts",
+        value: 2,
+    },
+    {
+        id: 16,
+        face: heart03,
+        suit: "hearts",
+        value: 3,
     }
 
 ]

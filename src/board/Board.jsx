@@ -11,11 +11,12 @@ export const Board = () => {
 
 const [deck, setDeck] = useState(Deck)
 const [spadesArray, setSpadesArray] = useState([])
+const [heartsArray, setHeartsArray] = useState([])
 
 useEffect(() => {
     console.log('spades array: ' + spadesArray);
     console.log('spades array length: ' + spadesArray.length)
-  }, [spadesArray]);
+  }, [spadesArray, heartsArray]);
 
 
 
@@ -24,6 +25,15 @@ useEffect(() => {
     drop: (item) => dropInSpadesArray(item.id, item.suit, item.value, item.face),
     collect: (monitor) => ({
         isOver: !!monitor.isOver(),
+    })
+ 
+})) 
+
+const [{isOverHearts}, dropHeart] = useDrop(() => ({
+    accept: "card",
+    drop: (item) => dropInHeartsArray(item.id, item.suit, item.value, item.face),
+    collect: (monitor) => ({
+        isOverHearts: !!monitor.isOver(),
     })
  
 })) 
@@ -41,7 +51,29 @@ const spliceFromCards = (id) => {
 
 
 
-const dropInSpadesArray = (id, suit, value, face) => {
+const dropInHeartsArray = (id, suit, value, face) => {
+    
+    setHeartsArray(heartsArray => {
+      if (heartsArray.length === 0 && suit === "hearts") {
+        if (value === 1) {
+          spliceFromCards(id)
+          return [...heartsArray, {id: id, face: face, suit: suit, value: value}];
+        }
+      } else if (heartsArray.length > 0 && suit === "hearts") {
+        console.log(suit + " " + value)
+        if (heartsArray[heartsArray.length-1].value === value - 1) {
+            setHeartsArray(heartsArray => {
+                spliceFromCards(id)
+                return [...heartsArray, {id: id, face: face, suit: suit, value: value}];
+            })
+        }
+      }
+
+      return heartsArray;
+    });
+  };
+
+  const dropInSpadesArray = (id, suit, value, face) => {
     
     setSpadesArray(spadesArray => {
       if (spadesArray.length === 0 && suit === "spades") {
@@ -72,7 +104,11 @@ const dropInSpadesArray = (id, suit, value, face) => {
                             return <span key={card.id}><img src={card.face} className='dropped-card'/></span>
                         })}
                     </div>
-                    <div className='card-place'></div>
+                    <div className='card-place' ref={dropHeart}>
+                        {heartsArray.map(card => {
+                            return <span key={card.id}><img src={card.face} className='dropped-card'    /></span>
+                        })}
+                    </div>
                     <div className='card-place'></div>
                     <div className='card-place'></div>
             </div>
